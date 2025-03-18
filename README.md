@@ -35,7 +35,6 @@
     <h4 color="green">4.1 PanelAdmin</h4>
     <h4 color="green">4.2 UserAll</h4>
     <h4 color="green">4.3 UserUpdate</h4><br>
-    <h4 color="green">3.5 Logout de usuarios</h4><br>
     <h3 color="blue">5. Rol Admin | Categorias</h3>
     <h4 color="green">5.1 CategoriaAll</h4>
     <h4 color="green">5.2 CategoriaStore</h4>
