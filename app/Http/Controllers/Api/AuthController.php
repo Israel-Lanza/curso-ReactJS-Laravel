@@ -11,7 +11,7 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-        $response = ["success"=>"false"];
+        $response = ["success"=>false];
 
         //Validaciones
         $validator = Validator::make($request->all(), [
@@ -42,5 +42,40 @@ class AuthController extends Controller
         //$response["token"] = $user->createToken("Tutorial")->plainTextToken;
 
         return response()->json($response, 200);
+    }
+
+
+    public function login(Request $request)
+    {
+        $response = ["success"=>false];
+
+        //Validaciones
+        $validator = Validator::make($request->all(), [
+            'email'     => 'required|email',
+            'password'  => 'required',
+        ]);
+
+        //para retornar si hay errores. 
+        if($validator->fails())
+        {
+            $response = ["error"=>$validator->errors()];
+            return response()->json($response, 200);
+        }
+
+
+
+        if(auth()->attempt(['email' => $request->email, 'password' => $request->password]))
+        {
+            $user = auth()->user();
+            $user->hasRole('client');//le añadimos el rol client en este caso 
+
+            $response['token'] = $user->createToken("Tutorial.app")->plainTextToken;
+            $response['user'] = $user;
+            $response['success'] = true;
+        }
+        return response()->json($response, 200);
+
+
+
     }
 }
