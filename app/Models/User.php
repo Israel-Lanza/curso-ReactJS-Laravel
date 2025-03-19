@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //Relacion del modelo user con el modelo de la categoria
+    public function empresas()
+    {
+        return $this->hasMany(Empresa::class);
+    }
 }
