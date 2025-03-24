@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,9 +16,23 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $usuario = User::create([
+            'name' => 'Israel',
+            'email' => 'isra@gmail.com',
+            'password' => '12345'
         ]);
+
+        $usuario2 = User::create([
+            'name' => 'Melo',
+            'email' => 'melo@gmail.com',
+            'password' => '12345'
+        ]);
+
+        //rutas para roles y roles. Esta es la forma de crearlos (es una de muchas formas)
+        $roleAdmin = Role::create(['name' => 'admin']);
+        $roleClient = Role::create(['name' => 'client']);
+
+        $usuario->assignRole($roleAdmin);
+        $usuario2->assignRole($roleClient);
     }
 }
